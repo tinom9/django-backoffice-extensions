@@ -148,6 +148,8 @@ def getattr_filter(obj, name):
         result = status_tag(obj)
     if callable(result) and not isinstance(result, Manager):
         result = result()
+    if hasattr(obj, f"get_{name}_display"):
+        result = getattr(obj, f"get_{name}_display")()
     return _parse_value(result)
 
 
